@@ -1,0 +1,140 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    font-family: sans-serif;
+}
+body{
+    background-image: linear-gradient(to left, #EB2907, #EB5107, #EB7906, #EB9A07, #EB9A07);
+    background-size: 200% 200% ;
+    animation: gradientAnimation 2s ease infinite reverse;
+}
+.hero-image{
+   width: 100%;
+   height: auto;
+   background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(images/backround.jpg);
+   background-repeat: repeat-y;
+   background-size:cover ;
+   background-position: center;
+   /*position: -webkit-sticky; /* Safari *
+    position: sticky !important;
+    top: 0;*/
+}
+.top-nav{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    width: 120px;
+    cursor: pointer;
+    border-radius: 25%;
+}
+.top-nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+.top-nav ul li a{
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+.top-nav ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+.top-nav ul li:hover::after{
+    width: 100%;
+}
+.top-nav ul li:active{
+    transform: translateY(4px);
+}
+
+.classes{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    flex-wrap: nowrap;
+}
+
+.class{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    
+}
+.class > img{
+    padding-top: 15px;
+    width: 70%
+}
+button{
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #000000;
+    background: transparent;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 9px #999999;
+}
+button:hover{
+    background-color: #eb5100;
+}
+button:active {
+    background-color: #eb5100;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.week{
+    margin: 10px; 
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    background-color: #999;
+    margin: auto;
+}
+.textbox {
+    width: 70%;
+    height: auto;
+    padding: 2px;
+    background: #ddd;
+}
+@media (max-width: 768px) {
+
+    .logo{
+        width: 60px;
+    }
+    .classes{
+        width: 70%;
+        margin:  5px auto;
+        padding: 5px;
+        flex-direction: column;
+        background-color: #e5e5e5e4;
+
+    }
+    .textbox{
+        background-color: transparent;
+    }
+    .class > img{
+        display: none;
+    }
+    .week{
+        background-color: transparent;
+        position: relative;
+    }
+}
