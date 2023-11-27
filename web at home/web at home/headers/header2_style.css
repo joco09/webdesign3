@@ -1,0 +1,105 @@
+header
+{
+    background-image: linear-gradient(to left, #EB2907, #EB5107, #EB7906, #EB9A07, #EB9A07);
+    background-size: 200% 200%;
+    animation: gradientAnimation 2s ease infinite reverse;
+    height: 100px;
+    box-shadow: 0 0.5px 10px gray;
+    display: grid;
+    grid-template-columns: 1fr 7fr 5fr;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.searchBar
+{
+    background-color: white;
+}
+
+.headlinesSection
+{
+    display: flex;
+    flex-direction: row;
+}
+
+header li
+{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+header li a
+{
+    font-family: GeomanistBold;
+    font-size: medium;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+header ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: white;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+header ul li:hover::after{
+    width: 100%;
+}
+
+header ul li:active{
+    transform: translateY(4px);
+}
+
+
+.searchBar
+{
+    width: 60%;
+    height: 40%;
+    border: 3px solid #8E063C;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    background-color: #C30034;
+}
+
+.searchBar input
+{
+    width: 70%;
+    flex-grow: 2;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    padding-left: 15px;
+    font-family: GeomanistLight;
+    font-size: 16px;
+}
+
+::placeholder {
+    color: white;
+    opacity: 0.8; /* Firefox */
+  }
+  
+  ::-ms-input-placeholder { /* Edge 12-18 */
+    color: white;
+  }
+
+.searchBar button
+{
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    padding-top: 5px;
+    padding-right: 10px;
+}

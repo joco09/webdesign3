@@ -1,0 +1,143 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    font-family: sans-serif;
+}
+body{
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to left, #EB2907, #EB5107, #EB7906, #EB9A07, #EB9A07);
+    background-size: 200% 200%;
+    animation: gradientAnimation 2s ease infinite reverse;
+}
+.hero-image{
+   width: 100%;
+   height: auto;
+   background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../images/backround.jpg);
+   background-repeat: repeat-y;
+   background-size:cover ;
+   background-position: center;
+}
+.top-nav{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    width: 120px;
+    cursor: pointer;
+    border-radius: 25%;
+}
+.top-nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+.top-nav ul li a{
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+.top-nav ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #eb5100;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+.top-nav ul li:hover::after{
+    width: 100%;
+}
+.top-nav ul li:active{
+    transform: translateY(4px);
+}
+
+.class_info_container
+{
+    height: auto;
+    width: 400px;
+    margin: 15px auto;
+    border: 5px solid #f0f0f0;
+    border-radius: 15px;
+    box-shadow: 0 0 5px 2px #f0f0f0, 0 0 5px black;
+    background-color: white;
+    padding: 50px;
+}   
+.class_info_form{
+    display: grid;
+    row-gap: 20px;
+    font-family: GeomanistLight;
+    font-weight: bolder;
+    font-size: large;
+    color: #787878;
+    /* align-items: center; */
+}
+.logo-form{
+    width: 100px;
+    margin: auto;
+}
+input{
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    height: 35px;
+    background-color: #D6D6D6;
+    font-family: GeomanistLight;
+    font-weight: lighter;
+    font-size: large;
+    color: #787878;
+    transition: 0.2s;
+}
+select{
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    height: 35px;
+    background-color: #D6D6D6;
+    font-family: GeomanistLight;
+    font-weight: lighter;
+    font-size: large;
+    color: #787878;
+    transition: 0.2s;
+}
+.registerBtn
+{
+    height: 50px;
+    width: 175px;
+    border: none;
+    border-radius: 15px;
+    background-image: linear-gradient(to right, #EBB607, #EB9A07, #EB7906, #EB5107, #EB2907);
+    background-size: 200% 200%;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    margin: auto;
+    animation: gradientAnimation 2s ease infinite;
+    transition: 0.3s;
+}
+
+
+.registerBtn:hover
+{
+    transform: scale(1.1);
+   
+}
+@keyframes gradientAnimation{
+    0%, 100%
+    {
+        background-position: 10% 0%;
+    }
+    50%
+    {
+        background-position: 91% 100%;
+    }
+}

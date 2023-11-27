@@ -1,0 +1,285 @@
+@font-face 
+{
+    font-family: GeomanistLight;
+    src: url(../Font/Geomanist-Light.otf);
+}
+
+@font-face {
+    font-family: GeomanistBold;
+    src: url(../Font/Geomanist-Bold.otf);
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    overflow: hidden;
+    position: relative;
+}
+
+form
+{
+    display: none;
+}
+
+.form
+{
+    height: 300px;
+    width: 400px;
+    margin: auto auto;
+    border: 5px solid #f0f0f0;
+    border-radius: 15px;
+    box-shadow: 0 5px 5px 2px gray;
+    background-color: white;
+    padding: 10px 40px;
+}
+
+.form ul
+{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    font-family: GeomanistLight;
+    font-weight: bolder;
+    font-size: large;
+    color: #787878;
+    transition: 0.3s;
+}
+
+.form .translate
+{
+    opacity: 0;
+}
+
+li
+{
+    display: flex;
+    flex-direction: column;
+}
+
+li label
+{
+    padding-top: 10px;
+    margin-bottom: 5px;
+}
+
+.inputsContainer
+{
+    display: grid;
+    grid-template-rows: 100px 100px;
+}
+
+.verificationForm input,
+.inputsContainer input
+{
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 20px;
+    height: 35px;
+    background-color: #D6D6D6;
+    font-family: GeomanistLight;
+    font-weight: lighter;
+    font-size: large;
+    color: #787878;
+    transition: 0.2s;
+}
+
+li div
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.verificationForm input:hover,
+.inputsContainer input:hover
+{
+    height: 45px;
+}
+
+.verificationForm input:hover,
+.inputsContainer input:focus
+{
+    height: 45px;
+}
+
+.verificationForm input:hover,
+.inputsContainer input:hover + li
+{
+    margin-bottom: 0;
+}
+
+.passwordInputContainer
+{
+    flex-direction: row;
+    background-color: #D6D6D6;
+    border-radius: 5px;
+}
+
+.passwordInputContainer input
+{
+    flex-grow: 2;
+}
+
+.passwordInputContainer button
+{
+    border: none;
+    border-radius: 5px;
+    background-color: #D6D6D6;
+    padding-right: 10px;
+    padding-top: 7px;
+    transition: 0.3s;
+}
+
+img
+{
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+button:hover > img
+{
+    transform: rotate(360deg);
+    cursor: pointer;
+}
+
+a
+{
+    margin-right: 0;
+    margin-top: 2px;
+    font-size: 14px;
+    color: #0038D1;
+    text-decoration: underline;
+    cursor: pointer;
+    text-shadow: none;
+    transition: 0.3s;
+}
+
+div a:hover
+{
+    text-shadow: 0 0 1px #0038D1;
+}
+
+.registerButtonContainer
+{
+    align-items: center;
+}
+
+.navigationButtonsContainer button,
+.registerBtn
+{
+    padding: 0;
+    height: 50px;
+    width: 175px;
+    border: none;
+    border-radius: 15px;
+    background-image: linear-gradient(to right, #EBB607, #EB9A07, #EB7906, #EB5107, #EB2907);
+    background-size: 200% 200%;
+    font-size: 20px;
+    font-family: GeomanistLight;
+    font-weight: 600;
+    color: white;
+    margin-top: 25px;
+    animation: gradientAnimation 2s ease infinite;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+@keyframes gradientAnimation
+{
+    0%, 100%
+    {
+        background-position: 10% 0%;
+    }
+    50%
+    {
+        background-position: 91% 100%;
+    }
+}
+
+.registerBtn:hover
+{
+    transform: scale(1.1);
+   
+}
+
+.warningLabels
+{
+    color: red;
+}
+
+.form .verificationForm
+{
+    height: 100%;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.verificationLabel
+{
+    padding-top: 20px;
+}
+
+.navigationButtonsContainer
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.navigationButtonsContainer button
+{
+    width: 100px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: medium;
+}
+
+.navigationButtonsContainer button:hover
+{
+    transform: scaleX(1.1);
+}
+
+.navigationButtonsContainer button:nth-child(1)
+{
+    justify-self: left;
+}
+
+.navigationButtonsContainer button:nth-child(2)
+{
+    justify-self: right;
+}
+
+.verInpDiv
+{
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-column-gap: 10px;
+}
+
+.verInpDiv input
+{
+    padding: 0;
+    text-align: center;
+}
+
+.verInpDiv input:hover
+{
+    height: 35px;
+}
+
+.verInpDiv input:focus
+{
+    box-shadow: 0 0 5px 2px #EBA607;
+}
+
+div.expand
+{
+    height: 400px;
+}

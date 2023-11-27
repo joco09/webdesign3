@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="add_class.css">
+    <title>Game Play</title>
+</head>
+
+<body>
+    
+<div class="hero-image">
+
+    <div class = "top-nav">
+
+        <img class="logo" alt="logo" src="../images/logo.png">
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <ul>
+            <li><a href="home">Home</a></li>
+            <li><a href="courses-and-lessons">Courses and lessons</a></li>
+            <li><a href="join">Join</a></li>
+            <li><a href="log-in">Log in</a></li>
+        </ul>
+
+    </div>
+
+    <br>
+</div>
+<div class="class_info_container">
+    <form class="class_info_form" action="">
+        <img src="../images/logo.png" alt="logo" class="logo-form">
+        <label for="image" class="form-labes">Please Choice a Image</label>
+        <select name="image" id="image" class="form-input" required>
+            <option value="" disabled selected>Choice an image</option>
+            <option value="images/running.jpg">Running</option>
+            <option value="images/squats.jpg">Squats</option>
+            <option value="images/handstand.jpg">Hand Stand</option>
+        </select>
+        <label for="day" class="form-labes">Please Choice a Day</label>
+        <select name="day" id="day" class="form-input" required>
+            <option value="" disabled selected>Choice a Day</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+        </select>
+        <label for="time" class="form-labes" id="q">Please Choice a Time</label>
+        <select name="time" id="time" class="form-input" required>
+            <option value="" disabled selected>Choice a Time</option>
+            <option value="9:00">9:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+        </select>
+        <label for="class-name" class="form-labes">Class Name</label>
+        <input type="text" name="class-name" id="class-name" class="form-input" required>
+        <label for="trainer-name" class="form-labes">Trainer Name</label>
+        <input type="text" name="trainer-name" id="trainer-name" class="form-input" required>
+        <input type="submit" id="submit" class="registerBtn" value="Submit" Z>
+    </form>
+
+</div>
+
+    <script src="add_class.js"></script>
+
+
+</body>
+
+</html>
