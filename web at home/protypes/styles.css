@@ -1,0 +1,183 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    font-family: sans-serif;
+}
+body{
+    background-image: linear-gradient(to left, #EB2907, #EB5107, #EB7906, #EB9A07, #EB9A07);
+    background-size: 200% 200% ;
+    animation: gradientAnimation 2s ease infinite reverse;
+}
+.hero-image{
+   width: 100%;
+   height: auto;
+   background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(images/backround.jpg);
+   background-repeat: repeat-y;
+   background-size:cover ;
+   background-position: center;
+}
+.top-nav{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    width: 120px;
+    cursor: pointer;
+    border-radius: 25%;
+}
+.top-nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+.top-nav ul li a{
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+.top-nav ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+.top-nav ul li:hover::after{
+    width: 100%;
+}
+.top-nav ul li:active{
+    transform: translateY(4px);
+}
+/*.work-out-classes{
+
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}*/
+.time-table{
+    display: flex;
+    justify-content: center;
+    overflow-x:auto;
+}
+.classes{
+    width: 80%;
+    height: auto;
+    background-color: rgb(163, 249, 255);
+    margin: 10px; 
+    border-collapse: collapse; 
+    text-align: center;
+    
+}
+.classes th, td{
+    border: 1px solid;
+    padding: 10px;
+    
+}
+#hours{
+    width: 15%;
+}
+
+
+/*.class{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}//=*/
+
+.class-button > button{
+    width: auto;
+    height: auto;
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid #000000;
+    background: transparent;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 9px #999;
+    padding: 5px;
+    margin: 5px;
+}
+.class-button > button:hover {
+    background-color: #eb5100
+}
+.class-button > button:active {
+    background-color: #eb5100;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.class{
+    display: none;
+}
+@media (max-width: 768px) {
+    .logo{
+        width: 60px;
+        cursor: pointer;
+        border-radius: 25%;
+        margin: 10px;
+    }
+    .time-table{
+        display: block;
+        overflow-x:auto;
+    }
+    /*.work-out-classes{
+        background: #ed9542;
+        display: flex;
+        
+        text-align: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+    .class{
+        margin: 10px;
+        
+        padding: 0;
+        width: 250px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        
+    }
+    
+    button{
+        width: 200px;
+        padding: 15px 0;
+        text-align: center;
+        margin: 10px;
+        border-radius: 25px;
+        font-weight: bold;
+        border: 2px solid #eb5100;
+        background: transparent;
+        color: white;
+        cursor: pointer;
+        position: relative;
+        box-shadow: 0 9px #999;
+    }
+    button:hover {
+        background-color: #eb5100
+    }
+    button:active {
+        background-color: #eb5100;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+    .textbox {
+        width: 48%;
+        height: 100px;
+        border: 1px solid #ddd;
+        padding: 5px;
+        outline: none;
+        background: #ddd;
+    }*/
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE candidate-prifile [
+        <!ELEMENT candidate-profile(personal-details,Surname,Firstname,
+        Middlename,Mobilephone,Homephone,Email,Address,postcode,
+        employmenthistory,firstjob,qualification,maths,english)>
+
+        <!ELEMENT personal-details (#PCDATA)>
+        <!ELEMENT Surname (#PCDATA)>
+        <!ELEMENT Firstname (#PCDATA)>
+        <!ELEMENT Middlename (#PCDATA)>
+        <!ELEMENT Mobilephone (#PCDATA)>
+        <!ELEMENT Homephone (#PCDATA)>
+        <!ELEMENT Email (#PCDATA)>
+        <!ELEMENT Address (#PCDATA)>
+        <!ELEMENT postcode (#PCDATA)>
+        <!ELEMENT employmenthistory (#PCDATA)>
+        <!ELEMENT firstjob (#PCDATA)>
+        <!ELEMENT qualification (#PCDATA)>
+        <!ELEMENT maths (#PCDATA)>
+        <!ELEMENT english (#PCDATA)>
+
+<candidate-profile>
+    <personal-details>
+        <Surname>Joco</Surname>
+        <Firstname>John</Firstname>
+        <Middlename>Guerra</Middlename>
+        <Mobilephone>07514365987</Mobilephone>
+        <Homephone>N/A</Homephone>
+        <Email>kitojgijhg@djhgj.com</Email>
+        <Address>76hdsgfjhfdsgfg road</Address>
+        <postcode>bh1zb12</postcode>
+    </personal-details>
+    <employmenthistory>
+        <firstjob>slug and lettuce</firstjob>
+    </employmenthistory>
+    <qualification>
+        <maths>Grade:C</maths>
+        <english>Grdae:E</english>
+    </qualification>
+</candidate-profile>

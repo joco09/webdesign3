@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<personal-information>
+    <person1>
+        <name>Smith</name>
+        <fname>John</fname>
+        <City>3</City>
+        <Age>35</Age>
+        <Salary>$280</Salary>
+    </person1>
+    <person2>
+        <name>Doe</name>
+        <fname>Jane</fname>
+        <City>1</City>
+        <Age>28</Age>
+        <Salary>$325</Salary>
+    </person2>
+    <person3>
+        <name>Brown</name>
+        <fname>Scott</fname>
+        <City>3</City>
+        <Age>41</Age>
+        <Salary>$265</Salary>
+    </person3>
+    <person4>
+        <name>Howard</name>
+        <fname>Shemp</fname>
+        <City>4</City>
+        <Age>48</Age>
+        <Salary>$359</Salary>
+    </person4>
+    <person5>
+        <name>Taylor</name>
+        <fname>Tom</fname>
+        <City>2</City>
+        <Age>22</Age>
+        <Salary>$250</Salary>
+    </person5>
+</personal-information>
