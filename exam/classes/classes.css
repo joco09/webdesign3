@@ -9,16 +9,64 @@
     src: url(../Font/Geomanist-Bold.otf);
 }
 
-body
-{
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+.classes{
     display: flex;
-    flex-direction: column;
-    background-color: white;
-    position: relative;
+    justify-content: space-around;
+    text-align: center;
+    flex-wrap: nowrap;
 }
+
+.class{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+.class > img{
+    padding-top: 15px;
+    width: auto;
+    height: 240px;
+}
+.class > button{
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #000000;
+    background: transparent;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 9px #999999;
+    align-self: center;
+}
+.week{
+    margin: 10px;
+    position: -webkit-sticky;
+    /*position: sticky;*/
+    top: 0;
+    font-weight:bold;
+    margin: auto;
+}
+.textbox {
+    height: auto;
+    padding: 10px;
+    background: #ddd;
+}
+
+
+
+
+
+
+
+
+
+
+                /*adding class*/
 
 .add-classes > button,
 .class-button > button {
@@ -56,27 +104,10 @@ button:active {
 /*nav bar*/
 
 /*the time table*/
-.time-table{
-    display: flex;
-    justify-content: center;
-    overflow-x:auto;
-}
-.classes{
-    width: 80%;
-    height: auto;
-    background-color: #EB9A07;
-    box-shadow: 0 0.5px 10px gray;
-    margin: 100px 10px 10px 10px;
-    border-collapse: collapse;
-    text-align: center;
-}
-.classes th, td{
-    border: 1px solid;
-    padding: 10px;
-}
-#hours{
-    width: 15%;
-}
+
+
+
+
 /*the time table*/
 
 /*popup*/
@@ -89,7 +120,7 @@ button:active {
     height: 100%;
     overflow: auto;
     background-color: #00000066;
-  }
+}
 .closeButton{
     display: flex;
     width: 80%;
@@ -102,18 +133,6 @@ button:active {
     border-radius: 2px;
     box-shadow: none;
 }
-.class-info{
-    margin: auto;
-    font-size: x-large;
-    padding: 10px;
-    height: 100vh;
-}
-.class-info > img{
-    width: 25%;
-    height: auto;
-    border: 1px solid #ffffffe5;
-    border-radius: 10px;
-  }
 .add-classes{
     width: 80%;
     margin: auto;
@@ -131,31 +150,8 @@ button:active {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
-  }
-  .booking {
-    width: 15%;
-    height: auto;
-    text-align: center;
-    font-weight: bold;
-    border: 2px solid ;
-    border-radius: 10px;
-    background: #eb5100;
-    color: #000000;
-    cursor: pointer;
-    position: relative;
-    box-shadow: 0 4px #999999ab;
-    padding: 10px;
-    margin: 5px;
+}
 
-}
-.booking:hover {
-    background-color: #EB9A07
-}
-.booking:active {
-    background-color: #EB9A07;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-}
 .close-pop-up{
     width: 80%;
     display: flex;
@@ -176,11 +172,7 @@ button:active {
     background-color: transparent;
     box-shadow: none;
 }
-.textbox{
-    background-color: #e1e1e1;
-    width: 25%;
-    margin: auto;
-}
+
 
 /*popup*/
 
@@ -209,11 +201,6 @@ button:active {
     /* align-items: center; */
 }
 
-.logo-form{
-    width: 100px;
-    margin: auto;
-    border-radius: 10px;
-}
 input{
     border: none;
     border-radius: 5px;
@@ -276,22 +263,29 @@ select{
     }
 }
 @media (max-width: 768px) {
-    .time-table{
-        display: block;
-        overflow-x:auto;
+    .logo{
+        width: 60px;
     }
     .classes{
-        width: 100%;
+        width: 70%;
+        margin:  5px auto;
+        padding: 5px;
+        flex-direction: column;
+        background-color: #e5e5e5e4;
+
+    }
+    .textbox{
+        background-color: transparent;
+    }
+    .class > img{
+        display: none;
+    }
+    .week{
+        background-color: transparent;
+        position: relative;
     }
     .close-pop-up{
         width: 100%;
-    }
-    .class-info > img{
-        width: auto;
-        height: 70%;
-    }
-    .textbox{
-        width: 50%;
     }
     .adding-classes-from{
         width: 50%;
