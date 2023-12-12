@@ -45,7 +45,7 @@ $fourDayFromNow = array();
 $fiveDayFromNow = array();
 $sixDayFromNow = array();
 require '../database_conncetion/DBConnect.php';
-$sql = "SELECT  Class_Table.Class_name, Class_Table.Class_duration, Class_time_table.Class_Time, Class_time_table.Class_Date, Class_time_table.Class_time_table_id FROM Class_Table INNER JOIN Class_time_table ON Class_Table.Class_id = Class_time_table.Class_id ;";
+$sql = "SELECT  Class_Table.Class_name, Class_Table.Class_duration, Class_time_table.Time, Class_time_table.Date, Class_time_table.Class_time_table_id FROM Class_Table INNER JOIN Class_time_table ON Class_Table.Class_id = Class_time_table.Class_id ;";
 $result = mysqli_query($connection, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
     switch ($row['Class_Date']) {
