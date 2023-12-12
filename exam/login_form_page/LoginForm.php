@@ -2,54 +2,87 @@
 
 if ($_SERVER['REQUEST_METHOD'] == "POST")
 {
-    $userEmail = htmlspecialchars($_POST['uEmail']);
-    $userPassword = htmlspecialchars($_POST['uPIN']);
+    $error_message = "";
+    $userEmail =  preg_replace('/\s+/', '', $_POST['uEmail']);
+    $userPassword = preg_replace('/\s+/', '', $_POST['uPIN']);
 
-    require '../database_conncetion/DBConnect.php';
-
-    $userQuery = "SELECT * FROM User_member_table WHERE E_mail = '{$userEmail}';";
-    $userResult = mysqli_query($connection, $userQuery);
-
-    if (mysqli_num_rows($userResult) > 0)
+    try
     {
-        $userResultArray = mysqli_fetch_array($userResult, MYSQLI_ASSOC);
+      // Establishes connection to the database.
+      require_once '../database_conncetion/dbh.php';
 
-        if (password_verify($userPassword, $userResultArray['Password']))
+      // Query
+      $query = "select * from user_member_table where E_mail = ?;";
+
+      // Prepares query before sending in actual data.
+      $stmt = $pdo->prepare(($query));
+      // Sends data after query has been sent.
+      $stmt->execute([$userEmail]);
+
+      // Grabs the selected data from database.
+      $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      if (!empty($results))
+      {
+        if (password_verify($userPassword, $results[0]['Password']))
         {
-            session_start();
-            $_SESSION['memberID'] = $userResultArray['Member_id'];
-            $_SESSION['f_n'] = $userResultArray['First_name'];
-            $_SESSION['l_n'] = $userResultArray['Last_name'];
-            $_SESSION['p_n'] = $userResultArray['Phone_number'];
-            $_SESSION['email'] = $userResultArray['E_mail'];
-            $_SESSION['membership'] = $userResultArray['Membership_type_id'];
+            require_once '../database_conncetion/config_session.php';
 
-            header('location:../home_page/index.php');
-        }
-    }
-    else
-    {
-        $staffQuery = "SELECT * FROM User_staff_table WHERE E_mail = '{$userEmail}' AND Password = '{$userPassword}';";
-        $staffResult = mysqli_query($connection, $staffQuery);
-
-        if (mysqli_num_rows($staffResult) > 0)
-        {
-            session_start();
-            $staffResultArray = mysqli_fetch_array($staffResult, MYSQLI_ASSOC);
-
-            $_SESSION['f_n'] = $staffResultArray['First_name'];
-            $_SESSION['l_n'] = $staffResultArray['Last_name'];
-            $_SESSION['p_n'] = $staffResultArray['Phone_number'];
-            $_SESSION['email'] = $staffResultArray['E_mail'];
-            $_SESSION['clearance'] = $staffResultArray['Clearance_level'];
+            $_SESSION['Member_id'] = $results[0]['Member_id'];
+            $_SESSION['f_n'] = $results[0]['First_name'];
+            $_SESSION['l_n'] = $results[0]['Last_name'];
+            $_SESSION['p_n'] = $results[0]['Phone_number'];
+            $_SESSION['email'] = $results[0]['E_mail'];
+            $_SESSION['membership'] = $results[0]['Membership_type_id'];
 
             header('location:../home_page/index.php');
         }
         else
-            echo 'Wrong credentials';
-    }
+          $error_message = "Password doesn't match our records!";
+      }
+      else
+      {
+        // Query
+       $query = "select * from user_staff_table where E_mail = ?;";
+       
+       // Prepares query before sending in actual data.
+       $stmt = $pdo->prepare(($query));
+       // Sends data after query has been sent.
+       $stmt->execute([$userEmail]);
+       
+       // Grabs the selected data from database.
+       $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+       
+       if (!empty($results))
+       {
+         if (password_verify($userPass, $results[0]['Password']))
+         {
+             require_once '../database_conncetion/config_session.php';
 
-    mysqli_close($connection);
+             $_SESSION['Staff_id'] = $results[0]['Staff_id'];
+             $_SESSION['f_n'] = $results[0]['First_name'];
+             $_SESSION['l_n'] = $results[0]['Last_name'];
+             $_SESSION['p_n'] = $results[0]['Phone_number'];
+             $_SESSION['email'] = $results[0]['E_mail'];
+             $_SESSION['clearance'] = $results[0]['Clearance_level'];
+
+             header('location:../home_page/index.php');
+         }
+         else
+           $error_message = "Password doesn't match our records!";
+       }
+       else
+        $error_message = "This email is not registered!";
+      }
+
+      // Frees up space manually and closes database (best practice code).
+      $pdo = null;
+      $stmt = null;
+    }
+    catch (PDOException $e)
+    {
+      die("Query failed: " . $e->getMessage());
+    }
 }
 
 ?>

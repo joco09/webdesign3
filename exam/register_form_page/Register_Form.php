@@ -1,24 +1,51 @@
 <?php
 
+function trimInputs($input)
+{
+    return preg_replace('/\s+/', '', $input);
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] == "POST")
 {
-    require '../database_conncetion/DBConnect.php';
-
-    $userName = $_POST['firstName'];
-    $userLastName = $_POST['lastName'];
-    $userEmail = $_POST['emailAddress'];
-    $userPass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-    $userPN = $_POST['phoneNumber'];
+    $options = ['cost' => 12];
+    $userName = trimInputs($_POST['firstName']);
+    $userLastName = trimInputs($_POST['lastName']);
+    $userEmail = trimInputs($_POST['emailAddress']);
+    $userPass = password_hash(trimInputs($_POST['pass']), PASSWORD_BCRYPT, $options);
+    $userPN = trimInputs($_POST['phoneNumber']);
     $userMemType = $_POST['membershipType'];
+    $Member_id;
 
-    $query = "insert into User_member_table (First_name, Last_name, Phone_number, E_mail, Password, Membership_type_id)
-values ('$userName', '$userLastName', '$userPN', '$userEmail', '$userPass', '$userMemType');";
+    try
+    {
+      // Establishes connection to the database.
+      require_once '../database_conncetion/dbh.php';
+      // Query
+      $query = "insert into User_member_table (First_name, Last_name, Phone_number, E_mail, Password, Membership_type_id)
+      values (?, ?, ?, ?, ?, ?); SELECT SCOPE_IDENTITY()";
+      // Prepares query before sending in actual data.
+      $stmt = $pdo->prepare(($query));
+      // Sends data after query has been sent.
+      $stmt->execute([$userName, $userLastName, $userPN, $userEmail, $userPass, $userMemType]);
 
-    mysqli_query($connection, $query);
-    mysqli_close($connection);
+      // Grabs the selected data from database.
+      $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $Member_id = $results[0]['Member_id'];
 
-    session_start();
+      // Frees up space manually and closes database (best practice code).
+      $pdo = null;
+      $stmt = null;
+    }
+    catch (PDOException $e)
+    {
+      echo "";
+      die("Query failed: " . $e->getMessage());
+    }
 
+    require_once '../database_conncetion/config_session.php';
+
+    $_SESSION['Member_id'] = $Member_id;
     $_SESSION['f_n'] = $userName;
     $_SESSION['l_n'] = $userLastName;
     $_SESSION['p_n'] = $userPN;
