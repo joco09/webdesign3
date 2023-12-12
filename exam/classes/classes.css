@@ -53,7 +53,7 @@ button:active {
     flex-wrap: wrap;
     justify-content: space-around;
 }*/
-/*nav bar*/ 
+/*nav bar*/
 
 /*the time table*/
 .time-table{
@@ -67,7 +67,7 @@ button:active {
     background-color: #EB9A07;
     box-shadow: 0 0.5px 10px gray;
     margin: 100px 10px 10px 10px;
-    border-collapse: collapse; 
+    border-collapse: collapse;
     text-align: center;
 }
 .classes th, td{
@@ -88,7 +88,7 @@ button:active {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: #00000066; 
+    background-color: #00000066;
   }
 .closeButton{
     display: flex;
@@ -119,7 +119,7 @@ button:active {
     margin: auto;
     display: flex;
     justify-content: end;
-} 
+}
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -159,11 +159,11 @@ button:active {
 .close-pop-up{
     width: 80%;
     display: flex;
-    justify-content: end; 
+    justify-content: end;
 }
 .close-pop-up > button{
     background-color: transparent;
-    border-style: none; 
+    border-style: none;
     box-shadow: none;
     font-family: sans-serif;
     font-size: x-large;
@@ -197,7 +197,7 @@ button:active {
     box-shadow: 0 0 5px 2px #f0f0f0, 0 0 5px black;
     background-color: white;
     padding: 50px;
-}   
+}
 .class-info-form{
     display: grid;
     width: auto;
@@ -242,7 +242,7 @@ select{
 {
     color: red;
 }
-.registerBtn{   
+.registerBtn{
     height: 50px;
     width: 175px;
     border: none;
