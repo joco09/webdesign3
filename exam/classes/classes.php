@@ -31,8 +31,8 @@ function echoClasses($array){
                 <img src='../images/running.jpg' alt='handstand'>
                 <div class='textbox'> <h2>" . $array['Class_name'] . "</h2></div>
                 <div class='textbox'> Class Duration : " . $array['Class_duration'] . "</div>
-                <div class='textbox'> Class Date : " . formatingDate($array['Class_Date']) . "</div>                
-                <div class='textbox'> Class Time : " . formatingTime($array['Class_Time']) . "</div>       
+                <div class='textbox'> Class Date : " . formatingDate($array['Date']) . "</div>                
+                <div class='textbox'> Class Time : " . formatingTime($array['Time']) . "</div>       
                 <form class='class' action=" . htmlspecialchars($_SERVER['PHP_SELF']) . " method='post'><button type='submit' name='bookingClass' value=".$array['Class_time_table_id'].">Sign up</button></form>
           </div>";
 }
@@ -44,11 +44,11 @@ $threeDayFromNow = array();
 $fourDayFromNow = array();
 $fiveDayFromNow = array();
 $sixDayFromNow = array();
-require '../database_conncetion/DBConnect.php';
+require_once '../database_conncetion/DBConnect.php';
 $sql = "SELECT  Class_Table.Class_name, Class_Table.Class_duration, Class_time_table.Time, Class_time_table.Date, Class_time_table.Class_time_table_id FROM Class_Table INNER JOIN Class_time_table ON Class_Table.Class_id = Class_time_table.Class_id ;";
 $result = mysqli_query($connection, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
-    switch ($row['Class_Date']) {
+    switch ($row['Date']) {
         case getingTheWeekDate(0):
             array_push($today, echoClasses($row));
             break;
@@ -88,8 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $trainerName = validatingTheInputedData($_POST["trainerName"]);
     if (isset($_POST["classType"])&&isset($_POST["date"])&&isset($_POST["time"])&&isset($_POST["trainerName"])){
         require '../database_conncetion/DBConnect.php';
-        $sql = "INSERT INTO Class_time_table (Class_id, Staff_id, Gym_id,Class_time,Class_date)
-        VALUES ('$classType','$trainerName', 1, '$time', '$date');";
+        $sql = "INSERT INTO Class_time_table (Class_id, Staff_id, Gym_id,Time,Date)
+        VALUES ('{$_POST['classType']}',''{$_POST['trainerName']}'',1,'{$_POST['time']}',''{$_POST['date']}'');";
         mysqli_query($connection, $sql);
         mysqli_close($connection);
     }
@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     if (isset($_POST["bookingClass"])){
         require '../database_conncetion/DBConnect.php';
         $sql = "INSERT INTO Class_booking_table (Class_time_table_id, Member_id)
-        VALUES (".$_POST['bookingClass'].",1);";
+        VALUES ('{$_POST['bookingClass']}','{$_SESSION['memberID']}');";
         mysqli_query($connection, $sql);
         mysqli_close($connection);
     }
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game play</title>
-    <link rel="stylesheet" href="classes1.css">
+    <link rel="stylesheet" href="classes.css">
 </head>
 <body>
 <?php require '../headers/header2.php'; ?>
@@ -301,7 +301,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     </div>
 </div>
 
-<script src="classes1.js"></script>
+<script src="classes.js"></script>
 
 
 </body>
