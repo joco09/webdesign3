@@ -8,31 +8,6 @@
     font-family: GeomanistBold;
     src: url(../Font/Geomanist-Bold.otf);
 }
-.dropdownNavBar > button {
-    width: auto;
-    height: auto;
-    text-align: center;
-    border: 2px solid ;
-    border-radius: 5px;
-    background: #f0f0f0;
-    color: #000000;
-    cursor: pointer;
-    position: relative;
-    box-shadow: 0 4px #999999ab;
-    padding: 5px;
-    margin: 5px;
-    font-family: GeomanistLight;
-}
-.dropdownNavBar > button:hover {
-    background-color: #EB9A07;
-    transform: scale(1.1);
-}
-.dropdownNavBar > button:active {
-    background-color: #EB9A07;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-}
-
 header
 {
     background-image: linear-gradient(to left, #EB2907, #EB5107, #EB7906, #EB9A07, #EB9A07);
@@ -59,7 +34,7 @@ header > img{
 .dropdownNavBar{
     display: none;
 }
-.headlinesSection
+.headlinesSectionFullScreen
 {
     display: flex;
     flex-direction: row;
@@ -173,12 +148,18 @@ header ul li:active{
     text-align: center;
     padding-bottom: 25px;
 }
+.headlinesSection{
+    display: none;
+}
 @media (max-width: 768px){
+    .headlinesSectionFullScreen{
+        display: none;
+    }
     header{
         height: auto;
     }
     .headlinesSection{
-        display: flex;
+
         flex-direction: column;
         position: fixed;
         z-index: 1;
@@ -186,24 +167,39 @@ header ul li:active{
         top: 0;
         width: 100%;
         height: 100%;
-        overflow: auto;
         background-color: #5e5e5e;
         display: none;
+    }
+    .headlinesSection > li{
+        padding: 10px 0px;
     }
     header > img{
         width:60px;
         height: auto;
     }
-    #navbarDropdown{
-        display: block;
-    }
-    #navbarDropdown:hover .dropDownList{
-        display: block;
-    }
-    header ul li::after{
-        background : transparent;
+    header ul li:hover::after{
+        width: 0;
     }
     .dropdownNavBar{
         display: block;
+    }
+    .dropdownNavBar > button {
+        width: auto;
+        height: auto;
+        text-align: center;
+        border-radius: 5px;
+        background: #999999;
+        color: #000000;
+        cursor: pointer;
+        position: relative;
+        padding: 5px;
+        margin: 5px;
+        font-family: GeomanistLight;
+    }
+    .dropdownNavBar > button:hover {
+        transform: scale(1.1);
+    }
+    .dropdownNavBar > button:active {
+        transform: translateY(4px);
     }
 }
