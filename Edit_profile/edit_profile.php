@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 function trimInputs($input)
 {
     return preg_replace('/\s+/', '', $input);
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
         require_once '../database_conncetion/dbh.php';
 
         // Query
-        $query = "UPDATE User_member_table SET First_name=?, Last_name=?, Phone_number=?, E_mail=?, Password=?, Membership_type_id=? WHERE Member_id=13";
+        $query = "UPDATE User_member_table SET First_name=?, Last_name=?, Phone_number=?, E_mail=?, Password=?, Membership_type_id=? WHERE Member_id={$_SESSION['Member_id']}";
 
         // Prepares query before sending in actual data.
         $stmt = $pdo->prepare($query);
@@ -47,12 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
 
     require '../database_conncetion/config_session.php';
 
-    $_SESSION['Member_id'] = $Member_id;
-    $_SESSION['f_n'] = $userName;
-    $_SESSION['l_n'] = $userLastName;
-    $_SESSION['p_n'] = $userPN;
-    $_SESSION['email'] = $userEmail;
-    $_SESSION['membership'] = $userMemType;
+//    $_SESSION['Member_id'] = $Member_id;
+//    $_SESSION['f_n'] = $userName;
+//    $_SESSION['l_n'] = $userLastName;
+//    $_SESSION['p_n'] = $userPN;
+//    $_SESSION['email'] = $userEmail;
+//    $_SESSION['membership'] = $userMemType;
 
     header('location:../home_page/index.php');
 }
