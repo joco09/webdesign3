@@ -32,7 +32,7 @@ session_start();
                 }
                 else
                 {
-                    echo '<li><a href="../profile_page/profile.php"><img src="../images/person-icon.jpg" width="50"></a></li>';
+                    echo '<li><a href="../profile_page/profile.php"><img src="../images/person-icon.png" width="50"></a></li>';
                 }
 
                 ?>
@@ -61,23 +61,23 @@ session_start();
 
       <div class="class">
         <label>CHRISTINE</label>
-        <img src="../images/handstand.jpg" alt="woman doing handstand">
-        <p>"GamePlay gives me more than just a workout when I think about it. I joined while going through a tough time, it's given me so much back and helped me to stay feeling good. My quads don't feel so good after leg day, though!"</p>
+        <img src="../images/daniel%20trainer.jpg" alt="daniel-trainer">
+        <p>My name is Daniel and I've been a trainer for 7 years. I specialize in endurance training and injury rehabilitation. Join and Book an appointment with me if you fancy.</p>
         <a href="../register_form_page/Register_Form.php"><button type="button">Sign Up</button></a>
         
       </div>
 
       <div class="class">
         <label>ALDOVO</label>
-        <img src="../images/running.jpg" alt="man running">
-        <p>"I've become close friends with the assault bike and stairmasters... let's call it a love hate relationship! But in all seriousness, I've even become friendly with John, my PT, who's helped me get even more out of the gym in my path to losing 5 kilos!"</p>
+        <img src="../images/anna%20trainer.jpg" alt="anna-trainer">
+        <p>I am Arasha and have been a trainer ofr 2 years. i specialize in power lifting and crossfit training. If that sounds amazing </p>
         <a href="../register_form_page/Register_Form.php"><button type="button">Sign Up</button></a>
       </div>
 
       <div class="class">
         <label>TREVOR</label>
-        <img src="../images/squats.jpg" alt="man doing pull-up">
-        <p>"Playing sports growing up, I was slightly worried that going to the gym would feel isolating in comparison, but GamePlay is such a friendly environment. I've started attending more classes too, I love that classes are included in the price."</p>
+        <img src="../images/john%20trainer.jpg" alt="john-trainer">
+        <p>My name is john and i have been a trainer for 8 years. I specialize is combat sport training. I was a professional fighter for 4 years before becoming a trainer. If you want to get first class training then come join and book a class with me.</p>
         <a href="../register_form_page/Register_Form.php"><button type="button">Sign Up</button></a>
       </div>
 
