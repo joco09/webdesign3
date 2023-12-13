@@ -1,7 +1,24 @@
 <?php
 
 session_start();
+try {
+    require '../database_conncetion/dbh.php';
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $sql = "DELETE FROM User_member_table WHERE Member_id = ? ;";
 
+
+    // Prepares query before sending in actual data.
+    $stmt = $pdo->prepare($sql);
+
+    // Sends data after query has been sent.
+    $stmt->execute([$_SESSION['Member_id']]);
+        session_unset();
+        session_destroy();
+        header('location:../home_page/index.php');
+    }
+}catch (PDOException $e){
+    die("Query failed: " . $e->getMessage());
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,13 +66,13 @@ session_start();
             <label>View the gyms you have access to and add more!</label>
             <a href="join"><button type="button">Manage gyms</button></a>
         </div>
-        <!-- <div class="gym-passes">
-            <h2>Get Gym passes</h2>
-            <ul>
-                <li><p>Get your friend in the Gym!</p></li>
-            </ul>
-            <a href="join"><button type="button">Get Gym pass</button></a>
-        </div> -->
+        <div class="delete-account">
+            <h2>Delete account</h2>
+                <label>Get your friend in the Gym!</label>
+            <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
+                <a href="../home_page/index.php"><button type="submit"> Delete my account</button></a>
+            </form>
+        </div>
 
     </div>
 
