@@ -1,17 +1,79 @@
 <?php
 
 session_start();
+
+
+
+$membership = "";
+
+if($_SESSION['membership'] == 1){
+    $membership = "Bronze";
+}else if($_SESSION['membership'] == 2){
+    $membership = "Silver";
+}else if($_SESSION['membership'] == 3){
+    $membership = "Gold";
+}else{
+    $membership = "Admin";
+}
+
+
+
+if (isset($_SESSION["Member_id"])) {
+
+    try{
+        // Establishes connection to the database.
+        require '../database_conncetion/dbh.php';
+
+        // Query
+        $query = "select * from Class_booking_table where Member_id = ?;";
+
+        // Prepares query before sending in actual data.
+        $stmt = $pdo->prepare(($query));
+        // Sends data after query has been sent.
+        $stmt->execute([$_SESSION["Member_id"]]);
+
+        // Grabs the selected data from database.
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $booked_classes = array();
+
+        for($i = 0; $i < count($results); $i++){
+            array_push($booked_classes,$results[$i]['Class_time_table_id']) ;
+
+//        } foreach ($booked_classes as $value){
+//            echo $this;
+        }
+
+//        if(!empty($results)){
+//            $query = "SELECT  Class_Table.Class_name, Class_Table.Class_duration, Class_time_table.Time, Class_time_table.Date, Class_time_table.Class_time_table_id FROM Class_Table INNER JOIN Class_time_table ON Class_Table.Class_id = Class_time_table.Class_id WHERE Class_time_table.Class_time_table_id = ?;";
+//
+//            // Prepares query before sending in actual data.
+//            $stmt = $pdo->prepare(($query));
+//            // Sends data after query has been sent.
+//            $stmt->execute(extract($class_bookings));
+//
+//            // Grabs the selected data from database.
+//            $results2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//            echo $results2;
+//        }
+
+    }
+    catch (PDOException $e)
+    {
+        die("Query failed: " . $e);
+    }
+}
 try {
     require '../database_conncetion/dbh.php';
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "DELETE FROM User_member_table WHERE Member_id = ? ;";
 
 
-    // Prepares query before sending in actual data.
-    $stmt = $pdo->prepare($sql);
+        // Prepares query before sending in actual data.
+        $stmt = $pdo->prepare($sql);
 
-    // Sends data after query has been sent.
-    $stmt->execute([$_SESSION['Member_id']]);
+        // Sends data after query has been sent.
+        $stmt->execute([$_SESSION['Member_id']]);
         session_unset();
         session_destroy();
         header('location:../home_page/index.php');
@@ -19,7 +81,9 @@ try {
 }catch (PDOException $e){
     die("Query failed: " . $e->getMessage());
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +101,7 @@ try {
 
     <div class="welcome-message">
         <div class="welcome-container">
-            <img class="person-icon" alt="icon" src="../images/person-icon.jpg">
+            <img class="person-icon" alt="icon" src="../images/person-icon.png">
             <h2>Good to see you working on you gains, </h2>
             <h1> <?php echo $_SESSION['f_n']; ?></h1>
         </div>
@@ -47,8 +111,16 @@ try {
 
         <div class="personal-details">
             <h2>Personal details</h2>
-            <label>View and edit your personal details.</label>
-            <a href="join"><button type="button">Edit profile</button></a>
+            <ul>
+                <li><h2>First name:<span class="p-details"> <?php echo $_SESSION['f_n']; ?></span></h2></li>
+                <li><h2>Last name:<span class="p-details"> <?php echo $_SESSION['l_n']; ?></span></h2></li>
+                <li><h2>Email:<span class="p-details"> <?php echo $_SESSION['email']; ?></span></h2></li>
+                <li><h2>Phone number:<span class="p-details"> <?php echo $_SESSION['p_n']; ?></span></h2></li>
+                <li><h2>Membership type:<span class="p-details"> <?php echo $membership; ?></span></h2></li>
+            </ul>
+            <?php if(isset($_SESSION['Member_id'])){
+                echo "<a href='../Edit_profile/edit_profile.php'><button type='button'>Edit profile</button></a>";
+            }?>
         </div>
         <div class="personal-calendar">
             <h2>Personal calendar</h2>
@@ -66,32 +138,18 @@ try {
             <label>View the gyms you have access to and add more!</label>
             <a href="join"><button type="button">Manage gyms</button></a>
         </div>
-        <div class="delete-account">
-            <h2>Delete account</h2>
-                <label>Get your friend in the Gym!</label>
-            <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
-                <a href="../home_page/index.php"><button type="submit"> Delete my account</button></a>
-            </form>
-        </div>
 
+        <?php if(isset($_SESSION['Member_id'])){
+        echo "<div class='delete-account'>
+        <h2>Delete account</h2>
+        <label>Get your friend in the Gym!</label>
+        <form action=". htmlspecialchars($_SERVER['PHP_SELF'])." method='post'>
+        <a href='../home_page/index.php'><button type='submit'> Delete my account</button></a>
+        </form>
+    </div>";
+        }?>
     </div>
-
-    <div class="pop-up" id="pop-up">
-        <div class="pop-up-header">
-            <div class="title"> pop up</div>
-            <button class="close-button">&times;</button>
-        </div>
-        <div class="pop-up-body">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-             Dolorem quisquam sequi qui dolorum unde minus quis perferendis,
-              dicta praesentium labore nemo optio eius quibusdam laborum rem beatae dolor in,
-               laboriosam exercitationem, rerum architecto! Provident minima saepe commodi
-                ea officiis voluptate odit pariatur quasi, atque beatae earum at et in, fuga expedita necessitatibus vel? Temporibus rem eveniet maiores. Ducimus neque molestiae eos praesentium commodi, quos debitis sed optio nam iure velit doloribus voluptate incidunt consectetur soluta odit porro quae suscipit ratione?
-        </div>
-    </div> 
-    <div id="overlay"></div>
-
-    <script src="../profile page/profile.js"></script>
+    <script src="../profile_page/profile.js"></script>
 </body>
 
 </html>
