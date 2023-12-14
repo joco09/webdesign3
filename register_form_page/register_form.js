@@ -1,6 +1,18 @@
 const registerBtn = document.getElementsByClassName("registerBtn")[0];
 registerBtn.addEventListener("click", validate);
 
+let membershipType = "";
+document.getElementById("Bronze").addEventListener("click", function (){
+    membershipType = document.getElementById("Bronze").value;
+})
+document.getElementById("Silver").addEventListener("click", function (){
+    membershipType = document.getElementById("Silver").value;
+})
+document.getElementById("Gold").addEventListener("click", function (){
+    membershipType = document.getElementById("Gold").value;
+    console.log(membershipType)
+})
+
 function validate()
 {
     let regx = new RegExp("^([a-zA-Z0-9\\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$");
@@ -44,12 +56,14 @@ function validate()
     let formInps = document.getElementsByClassName("form")[0].getElementsByTagName("input");
     let actualFormInps = document.getElementsByTagName("form")[0].getElementsByTagName("input");
 
+
+
     actualFormInps[0].value = formInps[0].value;
     actualFormInps[1].value = formInps[1].value;
     actualFormInps[2].value = formInps[2].value;
     actualFormInps[3].value = formInps[3].value;
     actualFormInps[4].value = formInps[4].value;
-    actualFormInps[5].value = "3";
+    actualFormInps[5].value = membershipType;
     actualFormInps[6].click();
 
 }
