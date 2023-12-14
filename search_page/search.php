@@ -19,25 +19,30 @@ require '../headers/header2.php';
 
 try {
     if (isset($_POST['searchButton'])) {
-        require '../database_conncetion/dbh.php';
+        if ($_POST['searchButton'] == "" || $_POST['searchButton'] == null) {
+            echo "<div class='textbox'> There are no matches</div>";
+        }
+        else {
+            require '../database_conncetion/dbh.php';
 
-        $query = "SELECT Class_name, Class_duration, description FROM Class_Table WHERE description LIKE '%' ? '%' OR Class_name LIKE '%' ? '%';";
+            $query = "SELECT Class_name, Class_duration, description FROM Class_Table WHERE description LIKE '%' ? '%' OR Class_name LIKE '%' ? '%';";
 
-        // Prepares query before sending in actual data.
+            // Prepares query before sending in actual data.
 
-        $stmt = $pdo->prepare(($query));
-        $stmt->execute([$_POST["searchInput"], $_POST["searchInput"]]);
+            $stmt = $pdo->prepare(($query));
+            $stmt->execute([$_POST["searchInput"], $_POST["searchInput"]]);
 
-        // Sends data after query has been sent.
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        for ($i = 0; $i < count($results); $i++) {
-            echo "<div class='textbox'> <h2>" . $results[$i]['Class_name'] . "</h2></div>
+            // Sends data after query has been sent.
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            for ($i = 0; $i < count($results); $i++) {
+                echo "<div class='textbox'> <h2>" . $results[$i]['Class_name'] . "</h2></div>
             <div class='textbox'> Class Duration : " . $results[$i]['Class_duration'] . "</div>
             <div class='textbox'> Description : " . $results[$i]['description'] . "</div>          
             <a href='../classes/classes.php'> <button> View classes </button>  </a>";
-        }
-        if (count($results) == 0) {
-            echo "<div class='textbox'> There are no matches</div>";
+            }
+            if (count($results) == 0) {
+                echo "<div class='textbox'> There are no matches</div>";
+            }
         }
     }
     $pdo = null;
