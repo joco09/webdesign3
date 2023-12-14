@@ -1,7 +1,5 @@
 <?php
-
 require_once '../database_conncetion/config_session.php';
-
 ?>
 
 
@@ -16,10 +14,12 @@ require_once '../database_conncetion/config_session.php';
 <header>
         <img src="../images/logo.png" width="90">
         <div class="searchBar">
-            <input placeholder="Search in here...">
-            <button>
-                <img src="../images/magnifier.png">
-            </button>
+            <form class="searchForm" action="../search_page/search.php" method="post">
+                <input class="searchBarInput" type="text" name="searchInput" placeholder="Search in here...">
+                <button class="searchBarButton" id="searchButton" type="submit" name="searchButton">
+                    <img src="../images/magnifier.png">
+                </button>
+            </form>
         </div>
         <div class="dropdownNavBar" id="dropdownNavBar">
             <button>
@@ -66,6 +66,7 @@ require_once '../database_conncetion/config_session.php';
     </div>
 </header>
 </body>
+
 <script>
     window.document.getElementById("dropdownNavBar").addEventListener("click", function () {
         document.getElementById("headlinesSection").style.display = "flex";
@@ -73,7 +74,6 @@ require_once '../database_conncetion/config_session.php';
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
-
             }
         }
     })
