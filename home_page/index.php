@@ -63,7 +63,10 @@ session_start();
         <label>CHRISTINE</label>
         <img src="../images/daniel%20trainer.jpg" alt="daniel-trainer">
         <p>My name is Daniel and I've been a trainer for 7 years. I specialize in endurance training and injury rehabilitation. Join and Book an appointment with me if you fancy.</p>
-        <a href="../register_form_page/Register_Form.php"><button type="button">Sign Up</button></a>
+        <?php
+        if(!isset($_SESSION['f_n'])){
+            echo "<a href='../register_form_page/Register_Form.php'><button type='button'>Sign Up</button></a>";
+        } ?>
         
       </div>
 
@@ -71,14 +74,21 @@ session_start();
         <label>ALDOVO</label>
         <img src="../images/anna%20trainer.jpg" alt="anna-trainer">
         <p>I am Arasha and have been a trainer ofr 2 years. i specialize in power lifting and crossfit training. If that sounds amazing </p>
-        <a href="../register_form_page/Register_Form.php"><button type="button">Sign Up</button></a>
+          <?php
+          if(!isset($_SESSION['f_n'])) {
+              echo "<a href='../register_form_page/Register_Form.php'><button type='button'>Sign Up</button></a>";
+          } ?>
       </div>
 
       <div class="class">
         <label>TREVOR</label>
         <img src="../images/john%20trainer.jpg" alt="john-trainer">
         <p>My name is john and i have been a trainer for 8 years. I specialize is combat sport training. I was a professional fighter for 4 years before becoming a trainer. If you want to get first class training then come join and book a class with me.</p>
-        <a href="../register_form_page/Register_Form.php"><button type="button">Sign Up</button></a>
+        <?php
+        if(!isset($_SESSION['f_n'])){
+            echo "<a href='../register_form_page/Register_Form.php'><button type='button'>Sign Up</button></a>";
+        }
+        ?>
       </div>
 
     </div>
@@ -129,6 +139,7 @@ session_start();
         <li><a href="https://www.flaticon.com/free-icons/show-password" title="show password icons">Show password icons created by Stasy - Flaticon</a></li>
         <li><a href="https://www.flaticon.com/free-icons/show-password" title="show password icons">Show password icons created by ZAK - Flaticon</a></li>
         <li><a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Freepik - Flaticon</a></li>
+          <li><a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a></li>
       </ul>
     </footer>
     <script src="script.js"></script>
