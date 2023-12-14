@@ -19,7 +19,7 @@ require '../headers/header2.php';
 
 try {
     if (isset($_POST['searchButton'])) {
-        if ($_POST['searchButton'] == "" || $_POST['searchButton'] == null) {
+        if (empty($_POST['searchInput'])) {
             echo "<div class='textbox'> There are no matches</div>";
         }
         else {
