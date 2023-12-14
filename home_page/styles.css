@@ -273,7 +273,16 @@ footer ul li:nth-child(1)
     color: white;
     text-decoration: underline;
 }
+.dropdownNavBar{
+    display: none;
+}
+#top-nav{
+    display: none;
+}
 @media (max-width: 768px) {
+    #top-nav-full-screen{
+        display: none;
+    }
     .work-out-classes{
         width: auto;
         flex-direction: column;
@@ -285,6 +294,53 @@ footer ul li:nth-child(1)
     }
     footer{
         flex-wrap: wrap;
+    }
+    header{
+        height: auto;
+    }
+    #top-nav{
+        flex-direction: column;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #5e5e5e;
+        display: none;
+        align-items: start;
+    }
+    #top-nav > li{
+        padding: 10px 0px;
+    }
+    .logo{
+        width:60px;
+        height: auto;
+    }
+    .top-nav ul li:hover::after{
+        width: 0%;
+    }
+    .dropdownNavBar{
+        display: block;
+    }
+    .dropdownNavBar > button {
+        width: auto;
+        height: auto;
+        text-align: center;
+        border-radius: 5px;
+        background: #999999;
+        color: #000000;
+        cursor: pointer;
+        position: relative;
+        padding: 5px;
+        margin: 5px;
+        font-family: GeomanistLight;
+    }
+    .dropdownNavBar > button:hover {
+        transform: scale(1.1);
+    }
+    .dropdownNavBar > button:active {
+        transform: translateY(4px);
     }
 
 }
