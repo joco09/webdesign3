@@ -219,5 +219,13 @@ header ul li:active{
     }
     .searchBar {
         width: 50%;
+        height: 40%;
+        padding: 2px;
+    }
+
+    .searchBarInput{
+        font-size: xx-small;
+        width: 40%;
+        height: 100%;
     }
 }
