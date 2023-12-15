@@ -1,169 +1,159 @@
 <?php
-
 session_start();
-
-
-
-$membership = "";
-// variable for membership type
-
-if($_SESSION['membership'] == 1){
-    $membership = "Bronze";
-    // turn membership into bronze
-}else if($_SESSION['membership'] == 2){
-    $membership = "Silver";
-    // turn membership into silver
-}else if($_SESSION['membership'] == 3){
-    $membership = "Gold";
-    // turn membership into gold
-}else{
-    $membership = "Admin";
-    // shows admin as the status
+function trimInputs($input)
+{
+    return preg_replace('/\s+/', '', $input);
 }
 
 
-
-if (isset($_SESSION["Member_id"])) {
-    // check if Member_id is set
-
-    try{
-
-        require '../database_conncetion/dbh.php';
+if ($_SERVER['REQUEST_METHOD'] == "POST")
+{
+    $options = ['cost' => 12];
+    $userName = trimInputs($_POST['firstName']);
+    $userLastName = trimInputs($_POST['lastName']);
+    $userEmail = trimInputs($_POST['emailAddress']);
+    $userPass = password_hash(trimInputs($_POST['pass']), PASSWORD_BCRYPT, $options);
+    $userPN = trimInputs($_POST['phoneNumber']);
+    $userMemType = $_POST['membershipType'];
+    $Member_id = "";
+    try
+    {
         // Establishes connection to the database.
+        require_once '../database_conncetion/dbh.php';
 
-
-        $query = "select * from Class_booking_table where Member_id = ?;";
         // Query
+        $query = "UPDATE User_member_table SET First_name=?, Last_name=?, Phone_number=?, E_mail=?, Password=?, Membership_type_id=? WHERE Member_id={$_SESSION['Member_id']}";
 
-
-        $stmt = $pdo->prepare(($query));
         // Prepares query before sending in actual data.
+        $stmt = $pdo->prepare($query);
 
-
-        $stmt->execute([$_SESSION["Member_id"]]);
         // Sends data after query has been sent.
+        $stmt->execute([$userName, $userLastName, $userPN, $userEmail, $userPass, $userMemType]);
 
-
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // Grabs the selected data from database.
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $Member_id = $results[0]['Member_id'];
 
+        // Frees up space manually and closes database (best practice code).
+        $pdo = null;
+        $stmt = null;
     }
     catch (PDOException $e)
-        // catch exeptions
     {
-        die("Query failed: " . $e);
-        // message if connection failed
+        echo "";
+        die("Query failed: " . $e->getMessage());
     }
+
+    require '../database_conncetion/config_session.php';
+
+//    $_SESSION['Member_id'] = $Member_id;
+//    $_SESSION['f_n'] = $userName;
+//    $_SESSION['l_n'] = $userLastName;
+//    $_SESSION['p_n'] = $userPN;
+//    $_SESSION['email'] = $userEmail;
+//    $_SESSION['membership'] = $userMemType;
+
+    header('location:../home_page/index.php');
 }
-try {
-    require '../database_conncetion/dbh.php';
-    // establish connection to database
 
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        // check if request method is post
-
-        $sql = "DELETE FROM User_member_table WHERE Member_id = ? ;";
-        // sql command to delete user from the data base
-
-        $stmt = $pdo->prepare($sql);
-        // Prepares query before sending in actual data.
-
-
-        $stmt->execute([$_SESSION['Member_id']]);
-        // Sends data after query has been sent.
-
-        session_unset();
-        session_destroy();
-        // undest and destroy session
-
-        header('location:../home_page/index.php');
-        // redirect user to the home page
-    }
-}catch (PDOException $e){
-    // exception
-
-    die("Query failed: " . $e->getMessage());
-    // message when the query fails
-}
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="profile.css">
+    <link rel="stylesheet" type="text/css" href="../Edit_profile/edit_profile.css">
+    <script defer src="../Edit_profile/edit_profile.js"></script>
     <title>Game Play</title>
 </head>
 
 <body>
-    
-    <?php 
-    require '../headers/header2.php';
-    // php header
-    ?>
 
-    <div class="welcome-message">
-        <div class="welcome-container">
-            <img class="person-icon" alt="icon" src="../images/person-icon.png">
-            <h2>Good to see you working on you gains, </h2>
-            <h1> <?php echo $_SESSION['f_n']; ?></h1>
-<!--            display first name-->
+<?php require '../headers/header2.php'; ?>
+<!--header-->
 
-        </div>
-    </div>
 
-    <div class="profile">
+<form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+    <input type="text" name="firstName">
+    <input type="text" name="lastName">
+    <input type="text" name="phoneNumber">
+    <input type="text" name="emailAddress">
+    <input type="text" name="pass">
+    <input type="text" name="membershipType">
+    <input type="submit">
+</form>
+<!-- Don't worry about this -->
 
-        <div class="personal-details">
-            <h2>Personal details</h2>
-            <ul>
-                <li><h2>First name:<span class="p-details"> <?php echo $_SESSION['f_n']; ?></span></h2></li>
-                <li><h2>Last name:<span class="p-details"> <?php echo $_SESSION['l_n']; ?></span></h2></li>
-                <li><h2>Email:<span class="p-details"> <?php echo $_SESSION['email']; ?></span></h2></li>
-                <li><h2>Phone number:<span class="p-details"> <?php echo $_SESSION['p_n']; ?></span></h2></li>
-                <li><h2>Membership type:<span class="p-details"> <?php echo $membership; ?></span></h2></li>
-<!--                 display personal details-->
-
-            </ul>
-            <?php if(isset($_SESSION['Member_id'])){
-                echo "<a href='../Edit_profile/edit_profile.php'><button type='button'>Edit profile</button></a>";
-                // this shows the edit button for members only and not for admin
-            }?>
-        </div>
-        <div class="personal-calendar">
-            <h2>Personal calendar</h2>
-            <label>You have $classesCount classes booked.</label>
-            <a href="join"><button type="button">Edit calendar</button></a>
-        </div>
-
-        <div class="upgrade-account">
-            <h2>Upgrade account</h2>
-            <label>From £4 a moth. Get multi gym acces and free Gym passes!</label>
-            <a href="join"><button type="button">Upgrade account</button></a>
-        </div>
-        <div class="gym-access">
-            <h2>Your Gyms</h2>
-            <label>View the gyms you have access to and add more!</label>
-            <a href="join"><button type="button">Manage gyms</button></a>
-        </div>
-
-        <?php if(isset($_SESSION['Member_id'])){
-//            this code will only show the delete account function to members and not the admin
-        }
-        echo "<div class='delete-account'>
-
-        <h2>Delete account</h2>
-        
-        <label>Thinking of quiting the gym?</label>
-        <form action=". htmlspecialchars($_SERVER['PHP_SELF'])." method='post'>
-        <a href='../home_page/index.php'><button type='submit'> Delete my account</button></a>
-        </form>
-    </div>";
-        ?>
-    </div>
-
+<div class="form">
+    <ul>
+        <li class="fullNameInputsContainer">
+            <div>
+                <label>First Name: <label class="warningLabels"></label></label>
+                <input type="text">
+            </div>
+            <div>
+                <label>Last Name: <label class="warningLabels"></label></label>
+                <input type="text">
+            </div>
+        </li>
+        <li>
+            <label>Phone number: <label class="warningLabels"></label></label>
+            <input type="text">
+        </li>
+        <li>
+            <label>Email: <label class="warningLabels"></label></label>
+            <input type="text">
+        </li>
+        <li>
+            <div>
+                <label>PIN: <label class="warningLabels"></label></label>
+                <div class="passwordInputContainer">
+                    <input type="password">
+                    <button><img src="../images/eye.png"></button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div>
+                <label>Confirm PIN: <label class="warningLabels"></label></label>
+                <div class="passwordInputContainer">
+                    <input type="password">
+                    <button><img src="../images/eye.png"></button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <label>Choose your membership: <label class="warningLabels"></label></label>
+            <div class="membershipsContainer">
+                <div>
+                    <label>Bronze</label>
+                    <button id="Bronze" value="1">
+                        <img src="../images/bronze-cup.png" width="70">
+                    </button>
+                    <label>£9.99</label>
+                </div>
+                <div>
+                    <label>Silver</label>
+                    <button id="Silver" value="2">
+                        <img src="../images/silver-cup.png" width="70">
+                    </button>
+                    <label>£19.99</label>
+                </div>
+                <div>
+                    <label>Gold</label>
+                    <button id="Gold" value="3">
+                        <img src="../images/gold-cup.png" width="70">
+                    </button>
+                    <label>£29.99</label>
+                </div>
+            </div>
+        </li>
+        <li>
+            <button class="registerBtn">SIGN UP</button>
+        </li>
+    </ul>
+</div>
 
 </body>
 
