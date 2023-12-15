@@ -1,0 +1,256 @@
+@font-face
+{
+    font-family: GeomanistLight;
+    src: url(../Font/Geomanist-Light.otf);
+}
+
+@font-face {
+    font-family: GeomanistBold;
+    src: url(../Font/Geomanist-Bold.otf);
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* background-color: white; */
+    background-color: #8E063C;
+    /* background-image: linear-gradient(to left, #EB2907, #EB5107, #EB7906, #EB9A07, #EB9A07); */
+    background-size: 200% 200%;
+    /* animation: gradientAnimation 2s ease infinite reverse; */
+}
+
+/* Create account form */
+
+form
+{
+    display: none;
+}
+.form-container{
+    display: flex;
+}
+
+.form
+{
+    height: 700px;
+    width: 400px;
+    margin: auto auto;
+    border: 5px solid #f0f0f0;
+    border-radius: 15px;
+    box-shadow: 0 5px 5px 2px gray;
+    background-color: white;
+    padding: 30px 40px;
+}
+
+.form ul
+{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    list-style: none;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr) 2fr 2fr;
+    font-family: GeomanistLight;
+    font-weight: bolder;
+    font-size: large;
+    color: #787878;
+    transition: 0.3s;
+}
+
+.fullNameInputsContainer
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.fullNameInputsContainer div
+{
+    min-width: 0;
+}
+
+.fullNameInputsContainer div:nth-child(1)
+{
+    margin-right: 15px;
+}
+
+.fullNameInputsContainer div:nth-child(2)
+{
+    margin-left: 15px;
+}
+
+li
+{
+    display: flex;
+    flex-direction: column;
+}
+
+li:nth-child(6)
+{
+    padding-top: 25px;
+}
+
+
+li label
+{
+    padding-top: 10px;
+    margin-bottom: 5px;
+}
+
+input
+{
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 20px;
+    height: 35px;
+    background-color: #D6D6D6;
+    font-family: GeomanistLight;
+    font-weight: lighter;
+    font-size: large;
+    color: #787878;
+    transition: 0.2s;
+}
+
+li div
+{
+    display: flex;
+    flex-direction: column;
+}
+
+input:hover
+{
+    height: 45px;
+}
+
+input:focus
+{
+    height: 45px;
+}
+
+input:hover + li
+{
+    margin-bottom: 0;
+}
+
+.passwordInputContainer
+{
+    flex-direction: row;
+    background-color: #D6D6D6;
+    border-radius: 5px;
+}
+
+.passwordInputContainer input
+{
+    flex-grow: 2;
+}
+
+.passwordInputContainer button
+{
+    border: none;
+    border-radius: 5px;
+    background-color: #D6D6D6;
+    padding-right: 10px;
+    padding-top: 7px;
+    transition: 0.3s;
+}
+
+img
+{
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.passwordInputContainer button:hover > img
+{
+    transform: rotate(360deg);
+    cursor: pointer;
+}
+
+.registerBtn
+{
+    padding: 0;
+    height: 50px;
+    width: 175px;
+    border: none;
+    border-radius: 15px;
+    background-image: linear-gradient(to right, #EBB607, #EB9A07, #EB7906, #EB5107, #EB2907);
+    background-size: 200% 200%;
+    font-size: 20px;
+    font-family: GeomanistLight;
+    font-weight: 600;
+    color: white;
+    animation: gradientAnimation 2s ease infinite;
+    transition: 0.3s;
+    cursor: pointer;
+    margin: 45px auto;
+}
+
+@keyframes gradientAnimation
+{
+    0%, 100%
+    {
+        background-position: 10% 0%;
+    }
+    50%
+    {
+        background-position: 91% 100%;
+    }
+}
+
+.registerBtn:hover
+{
+    transform: scale(1.1);
+}
+
+.warningLabels
+{
+    color: red;
+}
+
+.membershipsContainer
+{
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.membershipsContainer div
+{
+    opacity: 0.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    transition: opacity 0.3s;
+}
+
+.highlight
+{
+    opacity: 1 !important;
+}
+
+
+.membershipsContainer div:hover
+{
+    opacity: 1;
+}
+
+.membershipsContainer button
+{
+    border: none;
+    background-color: transparent;
+}
+
+#email-registered
+{
+    position: absolute;
+    top: 150px;
+    left: 500px;
+    font-family: GeomanistBold;
+}
+
