@@ -1,0 +1,66 @@
+@font-face
+{
+    font-family: GeomanistLight;
+    src: url(../Font/Geomanist-Light.otf);
+}
+
+@font-face {
+    font-family: GeomanistBold;
+    src: url(../Font/Geomanist-Bold.otf);
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+.search-results{
+    display: flex;
+    flex-direction: column;
+    font-family: GeomanistLight;
+    padding: 15px;
+
+}
+.view-classes{
+    align-self: center;
+}
+.view-classes-button{
+    padding: 0;
+    height: 50px;
+    width: 175px;
+    border: none;
+    border-radius: 15px;
+    background-image: linear-gradient(to right, #EBB607, #EB9A07, #EB7906, #EB5107, #EB2907);
+    background-size: 200% 200%;
+    font-size: 20px;
+    font-family: GeomanistLight;
+    font-weight: 600;
+    color: white;
+    margin-top: 25px;
+    animation: gradientAnimation 2s ease infinite;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.class-name{
+    align-self: center;
+}
+@keyframes gradientAnimation
+{
+    0%, 100%
+    {
+        background-position: 10% 0%;
+    }
+    50%
+    {
+        background-position: 91% 100%;
+    }
+}
+.view-classes-button:hover
+{
+    transform: scale(1.1);
+
+}
