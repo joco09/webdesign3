@@ -112,7 +112,9 @@ body
 {
     margin-top: 50px;
 }
-
+.p-details{
+    color: black;
+}
 .welcome-message{
     margin-left: 5%;
     margin-bottom: 1%;
