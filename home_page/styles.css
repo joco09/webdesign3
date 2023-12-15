@@ -342,5 +342,7 @@ footer ul li:nth-child(1)
     .dropdownNavBar > button:active {
         transform: translateY(4px);
     }
-
+    .hero-image{
+        height: 150vh;
+    }
 }
