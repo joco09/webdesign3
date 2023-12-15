@@ -5,81 +5,85 @@ session_start();
 
 
 $membership = "";
+// variable for membership type
 
 if($_SESSION['membership'] == 1){
     $membership = "Bronze";
+    // turn membership into bronze
 }else if($_SESSION['membership'] == 2){
     $membership = "Silver";
+    // turn membership into silver
 }else if($_SESSION['membership'] == 3){
     $membership = "Gold";
+    // turn membership into gold
 }else{
     $membership = "Admin";
+    // shows admin as the status
 }
 
 
 
 if (isset($_SESSION["Member_id"])) {
+    // check if Member_id is set
 
     try{
-        // Establishes connection to the database.
+
         require '../database_conncetion/dbh.php';
+        // Establishes connection to the database.
 
-        // Query
+
         $query = "select * from Class_booking_table where Member_id = ?;";
+        // Query
 
-        // Prepares query before sending in actual data.
+
         $stmt = $pdo->prepare(($query));
-        // Sends data after query has been sent.
+        // Prepares query before sending in actual data.
+
+
         $stmt->execute([$_SESSION["Member_id"]]);
+        // Sends data after query has been sent.
 
-        // Grabs the selected data from database.
+
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $booked_classes = array();
-
-        for($i = 0; $i < count($results); $i++){
-            array_push($booked_classes,$results[$i]['Class_time_table_id']) ;
-
-//        } foreach ($booked_classes as $value){
-//            echo $this;
-        }
-
-//        if(!empty($results)){
-//            $query = "SELECT  Class_Table.Class_name, Class_Table.Class_duration, Class_time_table.Time, Class_time_table.Date, Class_time_table.Class_time_table_id FROM Class_Table INNER JOIN Class_time_table ON Class_Table.Class_id = Class_time_table.Class_id WHERE Class_time_table.Class_time_table_id = ?;";
-//
-//            // Prepares query before sending in actual data.
-//            $stmt = $pdo->prepare(($query));
-//            // Sends data after query has been sent.
-//            $stmt->execute(extract($class_bookings));
-//
-//            // Grabs the selected data from database.
-//            $results2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//            echo $results2;
-//        }
+        // Grabs the selected data from database.
 
     }
     catch (PDOException $e)
+        // catch exeptions
     {
         die("Query failed: " . $e);
+        // message if connection failed
     }
 }
 try {
     require '../database_conncetion/dbh.php';
+    // establish connection to database
+
     if($_SERVER["REQUEST_METHOD"] == "POST") {
+        // check if request method is post
+
         $sql = "DELETE FROM User_member_table WHERE Member_id = ? ;";
+        // sql command to delete user from the data base
 
-
-        // Prepares query before sending in actual data.
         $stmt = $pdo->prepare($sql);
+        // Prepares query before sending in actual data.
 
-        // Sends data after query has been sent.
+
         $stmt->execute([$_SESSION['Member_id']]);
+        // Sends data after query has been sent.
+
         session_unset();
         session_destroy();
+        // undest and destroy session
+
         header('location:../home_page/index.php');
+        // redirect user to the home page
     }
 }catch (PDOException $e){
+    // exception
+
     die("Query failed: " . $e->getMessage());
+    // message when the query fails
 }
 
 ?>
@@ -97,6 +101,7 @@ try {
     
     <?php 
     require '../headers/header2.php';
+    // php header
     ?>
 
     <div class="welcome-message">
@@ -104,6 +109,8 @@ try {
             <img class="person-icon" alt="icon" src="../images/person-icon.png">
             <h2>Good to see you working on you gains, </h2>
             <h1> <?php echo $_SESSION['f_n']; ?></h1>
+<!--            display first name-->
+
         </div>
     </div>
 
@@ -117,9 +124,12 @@ try {
                 <li><h2>Email:<span class="p-details"> <?php echo $_SESSION['email']; ?></span></h2></li>
                 <li><h2>Phone number:<span class="p-details"> <?php echo $_SESSION['p_n']; ?></span></h2></li>
                 <li><h2>Membership type:<span class="p-details"> <?php echo $membership; ?></span></h2></li>
+<!--                 display personal details-->
+
             </ul>
             <?php if(isset($_SESSION['Member_id'])){
                 echo "<a href='../Edit_profile/edit_profile.php'><button type='button'>Edit profile</button></a>";
+                // this shows the edit button for members only and not for admin
             }?>
         </div>
         <div class="personal-calendar">
@@ -140,16 +150,21 @@ try {
         </div>
 
         <?php if(isset($_SESSION['Member_id'])){
+//            this code will only show the delete account function to members and not the admin
+        }
         echo "<div class='delete-account'>
+
         <h2>Delete account</h2>
-        <label>Get your friend in the Gym!</label>
+        
+        <label>Thinking of quiting the gym?</label>
         <form action=". htmlspecialchars($_SERVER['PHP_SELF'])." method='post'>
         <a href='../home_page/index.php'><button type='submit'> Delete my account</button></a>
         </form>
     </div>";
-        }?>
+        ?>
     </div>
-    <script src="../profile_page/profile.js"></script>
+
+
 </body>
 
 </html>
